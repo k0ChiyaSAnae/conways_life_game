@@ -1,8 +1,9 @@
 #include <SDL.h>
-#include <stdio.h>
+
 #include <iostream>
 #include <vector>
 #include <random> 
+#include <chrono>
 
 const int ROWS = 50;
 const int COLS = 40;
@@ -64,9 +65,11 @@ int main(int argc, char* args[]) {
     bool quit = false;
     SDL_Event e;
 
-    //初始化一个二维vector，使其初始值随机为0或1
-    std::random_device rd;  
-    std::mt19937 gen(rd()); 
+    // //初始化一个二维vector，使其初始值随机为0或1
+    // std::random_device rd;  
+    // std::mt19937 gen(rd()); 
+    unsigned seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 gen(seed);
     // 定义一个整数分布，范围是 [0, 1] (闭区间)
     std::uniform_int_distribution<> distrib(0, 1);
 
